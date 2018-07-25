@@ -9,7 +9,10 @@
                  [environ "1.1.0"]]
   :main ^:skip-aot hatredify2.main
   :target-path "target/%s"
+  :uberjar-name "hatredify2.jar"
   :plugins [[lein-environ "1.1.0"]]
-  :profiles {:uberjar {:aot :all}
+  :profiles {:uberjar {:aot :all
+                       :source-paths ["profiles/prod"]}
              :dev {:dependencies [[ring/ring-devel "1.7.0-RC1"]]
-                   :env {:port 3000}}})
+                   :source-paths ["profiles/dev"]
+                   :env {:port "3000"}}})

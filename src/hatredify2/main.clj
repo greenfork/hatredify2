@@ -1,17 +1,15 @@
 (ns hatredify2.main
   (:require [org.httpkit.server :as s]
             [environ.core :refer [env]]
-            #_[ring/ring-devel :refer [wrap-reload]])
+            [hatredify2.config :as cfg])
   (:gen-class))
 
 (defn handler [request]
   {:status 200
    :headers {"Content Type" "text/html"}
-   :body "HATE! MORE HATE! EVEN MORE HATE!"})
+   :body "HATE! MORE HATE! MORE YASS HATE!"})
 
-(def app
-  (-> handler
-      #_wrap-reload))
+(def app (cfg/special-middleware handler))
 
 (defonce server (atom nil))
 
@@ -22,5 +20,5 @@
 (defn -main
   "Launch the web-server."
   [& args]
-  (reset! server (s/run-server #'handler
+  (reset! server (s/run-server #'app
                                {:port (Integer/parseInt (env :port))})))
