@@ -17,8 +17,14 @@
   (when-not (nil? @server)
     (@server :timeout 100)))
 
+(defn check-port []
+  (when-not (env :port)
+    (println "Please, specify the PORT variable, e.g. `export PORT=3000`")
+    (System/exit 1)))
+
 (defn -main
   "Launch the web-server."
   [& args]
+  (check-port)
   (reset! server (s/run-server #'app
                                {:port (Integer/parseInt (env :port))})))
