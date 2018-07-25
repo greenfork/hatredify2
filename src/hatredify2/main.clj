@@ -1,5 +1,6 @@
 (ns hatredify2.main
   (:require [org.httpkit.server :as s]
+            [environ.core :refer [env]]
             #_[ring/ring-devel :refer [wrap-reload]])
   (:gen-class))
 
@@ -21,4 +22,5 @@
 (defn -main
   "Launch the web-server."
   [& args]
-  (reset! server (s/run-server #'handler {:port 3000})))
+  (reset! server (s/run-server #'handler
+                               {:port (Integer/parseInt (env :port))})))
