@@ -4,30 +4,62 @@
         <title>Welcome to hatredify</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/brands.css" integrity="sha384-nT8r1Kzllf71iZl81CdFzObMsaLOhqBU1JD2+XoAALbdtWaXDOlWOZTR4v1ktjPE" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css" integrity="sha384-HbmWTHay9psM8qyzEKPc8odH4DsOuzdejtnr+OFtDmOcIVnhgReQ4GZBH7uwcjf6" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
-    <body>
-        <section id="pure">
-            <h1>hatredify</h1>
-            <p>Add some hatred to your text!</p>
-            <form method="POST" action="/">
-                <textarea class="form-control"
-                          rows="8"
-                          cols="50"
-                          name="pure-chunk"
-                          id="pure-chunk"
-                          placeholder="Put some text here..."></textarea>
-                <button type="submit">HATREDIFY</button>
-            </form>
-                </div>
-        </section>
-        <section id="hatred">
+    <body class="white">
+        <section id="pure" class="white">
+            <nav class="pure-menu pure-menu-horizontal">
+                <a href="/" class="pure-menu-heading pure-menu-link">hatredify</a>
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="https://github.com/greenfork/hatredify2"
+                           class="pure-menu-link"
+                           target="_blank">
+                            <i class="fab fa-github"></i>&nbsp;
+                            view source on Github</a>
+                    </li>
+                </ul>
+            </nav>
+
             <div class="container">
-                <textarea class="form-control"
-                          rows="8"
-                          cols="50"
-                          id="hatredified-chunk"></textarea>
+                <form method="POST" action="/" class="pure-form pure-form-stacked">
+                    <label for="pure-chunk">Add some hatred to your text!</label>
+                    <textarea class="form-control"
+                              name="pure-chunk"
+                              id="pure-chunk"
+                              placeholder="Put some text here...">
+What a beautiful day today!</textarea>
+                    <div class="centering">
+                        <button type="submit"
+                                class="pure-button button-hatred">HATREDIFY</button>
+                    </div>
+                </form>
             </div>
+        </section>
+
+        <section id="hatred" hidden>
+            <div class="container">
+                <div id="hatredified-chunk">
+                    What an <span class="red-text" >UGLY</span> day today!
+                </div>
+            </div>
+
+            <nav class="pure-menu pure-menu-horizontal flipv">
+                <ul class="pure-menu-list">
+                    <li class="pure-menu-item">
+                        <a href="https://github.com/greenfork/hatredify2"
+                           class="pure-menu-link red-text"
+                           target="_blank">
+                            buhtiG no ecruos weiv &nbsp;
+                            <i class="fab fa-github"></i></a>
+                    </li>
+                </ul>
+                <a href="/" class="pure-menu-heading pure-menu-link red-text">
+                    yfidertah</a>
+            </nav>
         </section>
     </body>
 </html>

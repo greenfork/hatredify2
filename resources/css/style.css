@@ -1,5 +1,44 @@
-body {margin: 0px; padding: 0px;}
-div.container {margin: 0 auto 0 auto; width: 1024px;}
-h1 {margin-top: 0px;}
-section#pure {background: #fff;}
-section#hatred {background: #000;}
+.container {padding: 1em 0 1em 0;}
+.button-hatred {
+    margin: 0 auto -2em auto;
+    font-size: 125%;
+    color: #beffed;
+    background: #c00;
+    position: relative;
+}
+.centering {text-align: center;}
+.black {background-color: black;}
+.white {background-color: white;}
+.red-text {color: #c00;}
+.flipv {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+/* PURE */
+#pure nav {background-color: #d9e1ff;}
+#pure form {width: 32em; margin: 0 auto 0 auto;}
+#pure form textarea {width: 32em; height: 12em;}
+
+/* HATRED */
+
+#hatred .container {margin-top: 2em;}
+#hatred nav {
+    text-align: right;
+    background-color: #0f0f0f;
+    position: fixed;
+    bottom: 0;
+}
+#hatred #hatredified-chunk {
+    background-color: cyan;
+    color: #075100;
+    width: 31em;
+    height: 11em;
+    margin: auto;
+    border-radius: .25em;
+    padding: .5em;
+}
