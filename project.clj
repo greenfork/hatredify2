@@ -7,7 +7,12 @@
                  [ring/ring-core "1.7.0-RC1"]
                  [http-kit "2.3.0"]
                  [environ "1.1.0"]
-                 [enlive "1.1.6"]]
+                 [enlive "1.1.6"]
+                 [clj-wordnet "0.3.0"]]
+  ;; Includes custom build of clj-wordnet library
+  :repositories [["local"
+                  ~(str (.toURI (java.io.File. "resources/libs")))]]
+
   :main ^:skip-aot hatredify2.main
   :target-path "target/%s"
   :uberjar-name "hatredify2.jar"
