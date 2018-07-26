@@ -21,4 +21,6 @@
                        :source-paths ["profiles/prod"]}
              :dev {:dependencies [[ring/ring-devel "1.7.0-RC1"]]
                    :source-paths ["profiles/dev"]
-                   :env {:port "3000"}}})
+                   :env {:port "3000"
+                         :wordnet-directory "resources/wordnet/dict_en"
+                         :positive-words "resources/wordnet/positive_words.txt"}}})
