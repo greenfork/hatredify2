@@ -2,20 +2,35 @@
   (:require [org.httpkit.server :as s]
             [environ.core :refer [env]]
             [ring.middleware.params :refer [wrap-params]]
+            [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.file-info :refer [wrap-file-info]]
+            [ring.util.response :as res]
             [hatredify2.config :as cfg]
-            [hatredify2.template :as t])
+            [hatredify2.template :as t]
+            [bidi.ring :refer [make-handler]])
   (:gen-class))
 
-(defn handler [request]
-  {:status 200
-   :headers {"Content Type" "text/html"}
-   :body (t/index {:pure-chunk "What a wonderful weather outside!"
-                   :hatredified-chunk "mememe"
-                   :request-method (:request-method request)})})
+(defn index-handler [request]
+  (-> {:pure-chunk "What a wonderful weather outside!"}
+      t/index
+      res/response))
+
+(defn post-handler [request]
+  (-> {:pure-chunk ((:params request) "pure-chunk")}
+      t/index
+      res/response))
+
+(def routes ["/" {:get index-handler
+                  :post post-handler}])
+
+(def handler
+  (make-handler routes))
 
 (def app (-> handler
              cfg/special-middleware
-             wrap-params))
+             wrap-params
+             wrap-file-info
+             (wrap-file "resources/public")))
 
 (defonce server (atom nil))
 
@@ -40,4 +55,5 @@
   "Launch the web-server."
   [& args]
   (check-port)
+  (println (str "Starting web-server on localhost:" (env :port)))
   (start-server))

@@ -8,7 +8,8 @@
                  [http-kit "2.3.0"]
                  [environ "1.1.0"]
                  [enlive "1.1.6"]
-                 [clj-wordnet "0.3.0"]]
+                 [clj-wordnet "0.3.0"]
+                 [bidi "2.1.3"]]
   ;; Includes custom build of clj-wordnet library
   :repositories [["local"
                   ~(str (.toURI (java.io.File. "resources/libs")))]]
