@@ -1,4 +1,5 @@
 (ns hatredify2.main
+  "Main IO logic of the program. Web-server management, routing and middleware."
   (:require [org.httpkit.server :as s]
             [environ.core :refer [env]]
             [ring.middleware.params :refer [wrap-params]]

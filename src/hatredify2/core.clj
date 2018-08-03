@@ -1,4 +1,5 @@
 (ns hatredify2.core
+  "Main business logic of the program. Make text more hateful."
   (:require [clojure.string :as s]))
 
 (def identifier "hjl")

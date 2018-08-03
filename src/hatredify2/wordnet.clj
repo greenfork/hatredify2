@@ -1,4 +1,6 @@
 (ns hatredify2.wordnet
+  "Build `dictionary`, mapping words to their antonyms.
+  Used by `hatredify2.core`."
   (:require [clj-wordnet.core :as wd]
             [environ.core :refer [env]]))
 
