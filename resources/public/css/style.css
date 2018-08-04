@@ -10,6 +10,7 @@
 .black {background-color: black;}
 .white {background-color: white;}
 .red-text {color: #c00;}
+.highlight {color: #c00;}
 .flipv {
     -moz-transform: scaleY(-1);
     -o-transform: scaleY(-1);

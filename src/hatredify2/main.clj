@@ -8,18 +8,25 @@
             [ring.util.response :as res]
             [hatredify2.config :as cfg]
             [hatredify2.template :as t]
+            [hatredify2.core :as hc]
+            [hatredify2.wordnet :as wd]
             [bidi.ring :refer [make-handler]])
   (:gen-class))
 
 (defn index-handler [request]
-  (-> {:pure-chunk "What a wonderful weather outside!"}
+  (-> {:pure-chunk "What a wonderful weather outside!"
+       :request-method :get}
       t/index
       res/response))
 
 (defn post-handler [request]
-  (-> {:pure-chunk ((:params request) "pure-chunk")}
-      t/index
-      res/response))
+  (let [pure-chunk ((:params request) "pure-chunk")]
+    (-> {:pure-chunk pure-chunk
+         :request-method :post
+         :hatredified-chunk (t/highlight (hc/hatredify-text wd/dictionary
+                                                            pure-chunk))}
+        t/index
+        res/response)))
 
 (def routes ["/" {:get index-handler
                   :post post-handler}])
