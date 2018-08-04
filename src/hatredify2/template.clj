@@ -31,3 +31,15 @@
   [text]
   (let [re (re-pattern (str "\\b([A-Z]{2,})" identifier "\\b"))]
     (clojure.string/replace text re (html-highlight-word "$1"))))
+
+(defn nl2br
+  "Change newlines of `text` to <br> tokens."
+  [text]
+  (clojure.string/replace text #"\r\n" "<br>"))
+
+(defn htmlize
+  "Process `text` to be a nice html piece."
+  [text]
+  (-> text
+      highlight
+      nl2br))

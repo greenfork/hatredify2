@@ -23,7 +23,7 @@
   (let [pure-chunk ((:params request) "pure-chunk")]
     (-> {:pure-chunk pure-chunk
          :request-method :post
-         :hatredified-chunk (t/highlight (hc/hatredify-text wd/dictionary
+         :hatredified-chunk (t/htmlize (hc/hatredify-text wd/dictionary
                                                             pure-chunk))}
         t/index
         res/response)))
