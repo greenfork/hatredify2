@@ -3,7 +3,7 @@
   (:require [org.httpkit.server :as s]
             [environ.core :refer [env]]
             [ring.middleware.params :refer [wrap-params]]
-            [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.util.response :as res]
             [hatredify2.config :as cfg]
@@ -39,7 +39,7 @@
              cfg/special-middleware
              wrap-params
              wrap-file-info
-             (wrap-file "resources/public")))
+             (wrap-resource "public")))
 
 (defonce server (atom nil))
 
