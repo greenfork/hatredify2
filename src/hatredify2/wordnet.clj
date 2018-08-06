@@ -4,20 +4,21 @@
   (:require [clj-wordnet.core :as wd]
             [environ.core :refer [env]]))
 
-(def wordnet (wd/make-dictionary (env :wordnet-directory)))
-(def positive-words (line-seq (clojure.java.io/reader (env :positive-words))))
+(def wordnet (delay (wd/make-dictionary (env :wordnet-directory))))
+(def positive-words (delay (line-seq (clojure.java.io/reader
+                                      (env :positive-words)))))
 
 (defn- find-antonyms
   "Return a list of wordnet records of antonyms related to the given `word-id`."
   [word-id]
-  ((comp :antonym wd/lexical-relations wordnet) word-id))
+  ((comp :antonym wd/lexical-relations @wordnet) word-id))
 
 (defn- find-similar-words
   "Return a list of wordnet records of similar adjectives to the given
   `word-id`."
   [word-id]
   (let [similar-synsets
-        ((comp :similar-to wd/semantic-relations wd/synset wordnet) word-id)]
+        ((comp :similar-to wd/semantic-relations wd/synset @wordnet) word-id)]
     (filter #(= :adjective (:pos %))
             (mapcat wd/words similar-synsets))))
 
@@ -26,7 +27,7 @@
   In wordnet one word can contain different amount of meanings, each has its
   own ID."
   [word]
-  (map :id (wordnet word :adjective)))
+  (map :id (@wordnet word :adjective)))
 
 (defn- extract-antonyms
   "Return a set of adjectives, antonymous to the given `word`."
@@ -52,7 +53,7 @@
   "Return a set of adjectives with at least 1 synset in common with `word`.
   `word` is returned as well as it has its synset in common."
   [word]
-  (->> (wordnet word :adjective)
+  (->> (@wordnet word :adjective)
        (map wd/synset)
        (mapcat wd/words)
        (map :lemma)
@@ -70,4 +71,4 @@
        flatten
        (apply hash-map)))
 
-(def dictionary (form-dictionary-map positive-words))
+(def dictionary (delay (form-dictionary-map @positive-words)))

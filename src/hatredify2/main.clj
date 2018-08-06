@@ -10,6 +10,7 @@
             [hatredify2.template :as t]
             [hatredify2.core :as hc]
             [hatredify2.wordnet :as wd]
+            [hatredify2.check :as check]
             [bidi.ring :refer [make-handler]])
   (:gen-class))
 
@@ -23,8 +24,8 @@
   (let [pure-chunk ((:params request) "pure-chunk")]
     (-> {:pure-chunk pure-chunk
          :request-method :post
-         :hatredified-chunk (t/htmlize (hc/hatredify-text wd/dictionary
-                                                            pure-chunk))}
+         :hatredified-chunk (t/htmlize (hc/hatredify-text @wd/dictionary
+                                                          pure-chunk))}
         t/index
         res/response)))
 
@@ -54,14 +55,10 @@
   (stop-server)
   (start-server))
 
-(defn check-port []
-  (when-not (env :port)
-    (println "Please, specify the PORT variable, e.g. `export PORT=3000`")
-    (System/exit 1)))
-
 (defn -main
   "Launch the web-server."
   [& args]
-  (check-port)
+  (check/env-variables-exist?)
+  (check/env-variables-valid?)
   (println (str "Starting web-server on localhost:" (env :port)))
   (start-server))
